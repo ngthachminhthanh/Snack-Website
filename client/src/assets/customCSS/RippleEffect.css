@@ -1,0 +1,50 @@
+#chatbot {
+    width:56px;
+    height:56px;
+    background:rgb(59 130 246);
+    text-align:center;
+    font-weight:bold;
+    font-size:32px;
+    font-family:arial;
+    line-height:200px;
+    border-radius:50%;
+    position:fixed;
+    left: 2rem;
+    bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 60;
+}
+
+#chatbot:before {
+    position: absolute;
+    content: '';
+    border: 5px solid rgb(59 130 246);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    border-radius: 50%;
+    animation: animate 2s linear infinite;
+}
+
+#chatbot:after {
+    position: absolute;
+    content: '';
+    border: 5px solid rgb(59 130 246);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    border-radius: 50%;
+    animation: animate 2s 1s linear infinite;
+}
+
+@keyframes animate {
+    100% {
+        transform: scale(2);
+        opacity: 0
+    }
+}

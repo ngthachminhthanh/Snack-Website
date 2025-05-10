@@ -39,7 +39,7 @@ const Checkout = () => {
     <>
       <Header input={false} />
 
-      <div className="container mx-auto px-4 py-8 flex flex-col items-center">
+      <div className="container mx-auto mt-7 px-4 py-8 flex flex-col items-center">
         <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
           <div className="flex flex-col items-center justify-center mb-6">
             <div className="flex items-center">

@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const apiRouter = require('./modules/api/api.router')
-const authRouter = require('./modules/auth/auth.router');
+const apiRouter = require('./routes/api.router');
+const authRouter = require('./routes/auth.router');
 require('dotenv').config();
 
 // Kết nối đến MongoDB

@@ -8,6 +8,7 @@ import ProductImageModal from "./ProductImageModal";
 import axios from "axios";
 import Header from "../Header";
 import "../../../assets/customCSS/LoadingEffect.css";
+const API_BASE_URL = import.meta.env.API_BASE_URL;
 
 const Home = () => {
   const { user, logout } = useAuth();
@@ -30,8 +31,8 @@ const Home = () => {
     setLoading(true);
     try {
       const endpoint = category
-        ? `http://localhost:5000/api/products/${category}`
-        : "http://localhost:5000/api/products";
+        ? `${API_BASE_URL}/api/products/${category}`
+        : `${API_BASE_URL}/api/products`;
       const response = await axios.get(endpoint);
 
       setProducts(response.data);

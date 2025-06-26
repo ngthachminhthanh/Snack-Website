@@ -5,6 +5,7 @@ import { useAuth } from "../../auth/AuthContext";
 import "../../../assets/customCSS/LoadingEffect.css";
 import axios from "axios";
 import Header from "../Header";
+const API_BASE_URL = import.meta.env.API_BASE_URL;
 
 const Order = () => {
   const [provinces, setProvinces] = useState([]);
@@ -183,7 +184,7 @@ const Order = () => {
 
     try {
       setIsSubmitLoading(true);
-      await axios.post("http://localhost:5000/api/order", order);
+      await axios.post(`${API_BASE_URL}/api/order`, order);
       navigate("/checkout", { state: { order } });
     } catch (error) {
       console.error(error);

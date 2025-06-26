@@ -10,6 +10,7 @@ import {
   Trash2,
 } from "lucide-react";
 import "../../../assets/customCSS/LoadingEffect.css";
+const API_BASE_URL = import.meta.env.API_BASE_URL;
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -39,7 +40,7 @@ const ProductList = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/admin/products?page=${currentPage}&search=${debouncedSearchTerm}`
+        `${API_BASE_URL}/api/admin/products?page=${currentPage}&search=${debouncedSearchTerm}`
       );
       setProducts(response.data.products);
       setTotalPages(response.data.totalPages);
@@ -70,7 +71,7 @@ const ProductList = () => {
 
   const handleAddProduct = async () => {
     try {
-      await axios.post("http://localhost:5000/api/admin/products", newProduct);
+      await axios.post(`${API_BASE_URL}/api/admin/products`, newProduct);
       setIsAddProductModalOpen(false);
       fetchProducts();
       setNewProduct({
@@ -91,7 +92,7 @@ const ProductList = () => {
   const handleProductUpdate = async (updatedProduct) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/admin/products/${updatedProduct._id}`,
+        `${API_BASE_URL}/api/admin/products/${updatedProduct._id}`,
         updatedProduct
       );
       setIsDialogOpen(false);
@@ -105,7 +106,7 @@ const ProductList = () => {
   const handleProductDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/admin/products/${selectedProduct._id}`
+        `${API_BASE_URL}/api/admin/products/${selectedProduct._id}`
       );
       setIsDeleteDialogOpen(false);
       setIsDialogOpen(false);

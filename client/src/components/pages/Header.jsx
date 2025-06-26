@@ -13,6 +13,7 @@ import { IoIosLogOut } from "react-icons/io";
 import axios from "axios";
 import { useAuth } from "../auth/AuthContext";
 import TypingPlaceholderInput from "./TypingPlaceholderInput";
+const API_BASE_URL = import.meta.env.API_BASE_URL;
 
 const Header = ({ input, setProducts }) => {
   const { user, logout } = useAuth();
@@ -27,7 +28,7 @@ const Header = ({ input, setProducts }) => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/products?search=${keyword}`
+        `${API_BASE_URL}/api/products?search=${keyword}`
       );
       setProducts(response.data);
     } catch (error) {

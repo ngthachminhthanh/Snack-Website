@@ -3,6 +3,7 @@ import { Download } from "lucide-react";
 import Sidebar from "../Sidebar";
 import axios from "axios";
 import Header from "../Header";
+const API_BASE_URL = import.meta.env.API_BASE_URL;
 
 const Dashboard = () => {
   const [exportType, setExportType] = useState("");
@@ -21,7 +22,7 @@ const Dashboard = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/admin/export/${dataType}`,
+        `${API_BASE_URL}/api/admin/export/${dataType}`,
         {
           params: { format: exportType },
           responseType: "blob",

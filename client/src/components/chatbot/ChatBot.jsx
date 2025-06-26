@@ -3,7 +3,7 @@ import axios from "axios";
 import { RobotOutlined, CloseOutlined } from "@ant-design/icons";
 import Card from "./sections/Card";
 import "../../assets/customCSS/RippleEffect.css";
-const API_BASE_URL = import.meta.env.API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function ChatBot() {
   const [messages, setMessages] = useState([]);

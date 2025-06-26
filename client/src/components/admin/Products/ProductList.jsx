@@ -10,7 +10,7 @@ import {
   Trash2,
 } from "lucide-react";
 import "../../../assets/customCSS/LoadingEffect.css";
-const API_BASE_URL = import.meta.env.API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);

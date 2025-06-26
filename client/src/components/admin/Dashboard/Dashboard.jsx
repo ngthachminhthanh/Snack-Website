@@ -3,7 +3,7 @@ import { Download } from "lucide-react";
 import Sidebar from "../Sidebar";
 import axios from "axios";
 import Header from "../Header";
-const API_BASE_URL = import.meta.env.API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Dashboard = () => {
   const [exportType, setExportType] = useState("");

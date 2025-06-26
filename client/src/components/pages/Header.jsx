@@ -13,7 +13,7 @@ import { IoIosLogOut } from "react-icons/io";
 import axios from "axios";
 import { useAuth } from "../auth/AuthContext";
 import TypingPlaceholderInput from "./TypingPlaceholderInput";
-const API_BASE_URL = import.meta.env.API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Header = ({ input, setProducts }) => {
   const { user, logout } = useAuth();

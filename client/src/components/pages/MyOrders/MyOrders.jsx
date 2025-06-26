@@ -12,7 +12,7 @@ import { useAuth } from "../../auth/AuthContext";
 import { getStatusName } from "../../../utils/utilities";
 import axios from "axios";
 import Header from "../Header";
-const API_BASE_URL = import.meta.env.API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);

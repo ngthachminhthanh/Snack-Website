@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import axios from "axios";
 import "../../../assets/customCSS/LoadingEffect.css";
-const API_BASE_URL = import.meta.env.API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const CustomersManagement = () => {
   const [customers, setCustomers] = useState([]);
@@ -24,9 +24,6 @@ const CustomersManagement = () => {
     setIsLoading(true);
     setError(null);
     try {
-      // const { data } = await axios.get(
-      //     `http://localhost:5000/api/admin/customers?page=${currentPage}&search=${debouncedSearchTerm}`
-      // );
       const { data } = await axios.get(
         `${API_BASE_URL}/api/admin/customers?page=${currentPage}&search=${debouncedSearchTerm}`
       );

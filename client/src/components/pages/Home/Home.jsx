@@ -8,7 +8,7 @@ import ProductImageModal from "./ProductImageModal";
 import axios from "axios";
 import Header from "../Header";
 import "../../../assets/customCSS/LoadingEffect.css";
-const API_BASE_URL = import.meta.env.API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Home = () => {
   const { user, logout } = useAuth();

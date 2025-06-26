@@ -22,7 +22,7 @@ router.delete(`${prefixAdmin}/products/:id`, apiController.deleteProduct);
 router.get(`${prefixAdmin}/customers`, apiController.getCustomers);
 
 // Endpoint API router for Dialogflow
-// router.post(`${prefixDialogflow}/textQuery`, apiController.textQuery);
-// router.post(`${prefixDialogflow}/eventQuery`, apiController.eventQuery);
+router.post(`${prefixDialogflow}/textQuery`, apiController.textQuery);
+router.post(`${prefixDialogflow}/eventQuery`, apiController.eventQuery);
 
 module.exports = router;

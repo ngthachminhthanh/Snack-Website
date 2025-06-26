@@ -2,6 +2,15 @@ const productFacade = require("../facades/product.facade");
 const orderFacade = require("../facades/order.facade");
 const customerFacade = require("../facades/customer.facade");
 
+const ProductEntity = require("../models/products.model");
+const CustomerEntity = require("../models/customers.model");
+const { findProduct, getPrice, checkStock } = require("../utils/chatbot_handler"); 
+const { Parser } = require('json2csv');
+const dialogflow = require('@google-cloud/dialogflow');
+const mongoose = require('mongoose');
+const uuid = require('uuid');
+require('dotenv').config();
+
 // PRODUCTS
 exports.getAllProducts = async (req, res) => {
     try {
@@ -125,3 +134,105 @@ exports.exportFile = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+// ----- 
+// API handler for Dialogflow 
+const projectId = process.env.GOOGLE_PROJECT_ID;
+const languageCode = 'vi'; 
+
+
+// Create a new session client
+const sessionClient = new dialogflow.SessionsClient({
+    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS
+});
+
+async function handleIntent(result) {
+    const action = result.action;
+    const parameters = result.parameters.fields;
+
+    if (!parameters || Object.keys(parameters).length === 0) {
+        return "Xin lỗi, tôi không hiểu yêu cầu của bạn. Bạn có thể cung cấp thêm thông tin không?";
+    }
+
+    switch(action) {
+        case 'findProduct':
+            return await findProduct(parameters);
+        case 'getPrice':
+            return await getPrice(parameters);
+        case 'checkStock':
+            return await checkStock(parameters);
+        default:
+            return result.fulfillmentText || "Xin lỗi, tôi không hiểu yêu cầu của bạn. Bạn có thể cung cấp thêm thông tin không?";
+    }
+}
+
+exports.textQuery = async (req, res) => {
+    try {
+        // Tạo một sessionId mới cho mỗi request
+        const sessionId = uuid.v4();
+        const sessionPath = sessionClient.projectAgentSessionPath(
+            projectId,
+            sessionId
+        );
+        
+        const request = {
+            session: sessionPath,
+            queryInput: {
+                text: {
+                    text: req.body.text,
+                    languageCode: languageCode,
+                },
+            },
+        };
+
+        const responses = await sessionClient.detectIntent(request);
+        console.log('All responses from Dialogflow: ', responses);
+
+        const result = responses[0].queryResult;
+        console.log('Result: ', result);
+        console.log(`Query text: ${result.queryText}`);
+        console.log(`Response: ${result.fulfillmentText}`);
+        console.log(`Extracted parameters:`, result.parameters.fields);
+        console.log(`Triggered Action: ${result.action}`);        
+
+        // Xử lý intent và tương tác với MongoDB
+        let responseText = await handleIntent(result);
+        res.json({...result, fulfillmentText: responseText});
+    } catch (error) {
+        console.error('Lỗi trong text query:', error);
+        res.status(500).json({ error: 'Có lỗi gì đó đã xảy ra với text query' });
+    }
+}
+
+exports.eventQuery = async (req, res) => {
+    try {
+        // Tạo một sessionId mới cho mỗi request
+        const sessionId = uuid.v4();
+        const sessionPath = sessionClient.projectAgentSessionPath(
+            projectId,
+            sessionId
+        );
+        
+        const request = {
+            session: sessionPath,
+            queryInput: {
+                event: {
+                    name: req.body.event,
+                    languageCode: languageCode,
+                },
+            },
+        };
+
+        const responses = await sessionClient.detectIntent(request);
+        const result = responses[0].queryResult;
+        console.log(`Query: ${result.queryText}`);
+        console.log(`Response: ${result.fulfillmentText}`);
+
+        // Xử lý intent và tương tác với MongoDB
+        let responseText = await handleIntent(result);
+        res.json({...result, fulfillmentText: responseText});
+    } catch (error) {
+        console.error('Lỗi trong event query:', error);
+        res.status(500).json({ error: 'Có lỗi gì đó đã xảy ra với event query' });
+    }
+}

@@ -19,8 +19,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 
+// Health check endpoint
+app.get('/healthz', (req, res) => {
+  res.status(200).send('OK');
+});
+
 app.get('/', (req, res) => {
-  res.send('TEST SERVER from NODEJS + EXPRESSJS');
+  res.send('SERVER from NODEJS + EXPRESSJS IS OK');
 })
 
 app.listen(PORT, () => {

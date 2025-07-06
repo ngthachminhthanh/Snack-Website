@@ -39,17 +39,17 @@ const Checkout = () => {
     <>
       <Header input={false} />
 
-      <div className="container mx-auto mt-7 px-4 py-8 flex flex-col items-center">
+      <div className="container mx-auto mt-16 px-4 flex flex-col items-center">
         <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
           <div className="flex flex-col items-center justify-center mb-6">
             <div className="flex items-center">
               <CheckCircle className="text-green-500 mr-2" size={32} />
-              <h1 className="text-2xl font-bold text-gray-800">
+              <h1 className="text-2xl font-bold text-green-500">
                 Xác Nhận Đơn Hàng
               </h1>
             </div>
             <p className="text-gray-600 mt-2 text-center">
-              Cảm ơn bạn đã tin tưởng và mua hàng tại cửa hàng chúng tôi!
+              Cảm ơn bạn đã tin tưởng và mua hàng tại website của chúng tôi!
             </p>
           </div>
 
@@ -122,7 +122,7 @@ const Checkout = () => {
 
         <button
           onClick={() => navigate("/")}
-          className="flex items-center justify-center w-80 px-6 py-3 mt-8 bg-blue-500 text-white rounded-lg transition duration-300 ease-in-out hover:bg-blue-600 hover:scale-105 hover:shadow-lg"
+          className="flex items-center justify-center w-80 px-6 py-3 my-8 bg-blue-500 text-white rounded-lg transition duration-300 ease-in-out hover:bg-blue-600 hover:scale-105 hover:shadow-lg"
         >
           <Home className="mr-2" size={20} />
           Trở về trang chủ

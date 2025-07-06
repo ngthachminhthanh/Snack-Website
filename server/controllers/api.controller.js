@@ -9,7 +9,55 @@ const { Parser } = require('json2csv');
 const dialogflow = require('@google-cloud/dialogflow');
 const mongoose = require('mongoose');
 const uuid = require('uuid');
+const axios = require("axios");
+const https = require("https");
 require('dotenv').config();
+
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
+
+// PROVINCES
+exports.getAllProvinces = async (req, res) => {
+    try {
+        const response = await axios.get("https://provinces.open-api.vn/api/p/", { httpsAgent: agent });
+        res.json(response.data);
+      } catch (err) {
+        res.status(500).json({ error: "Lỗi proxy hoặc chứng chỉ không hợp lệ" });
+      }
+};
+
+exports.getProvinceByCode = async (req, res) => {
+    const { provinceCode } = req.params;
+  
+    try {
+      const response = await axios.get(
+        `https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`,
+        {
+          httpsAgent: agent,
+        }
+      );
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({ error: "Lỗi khi lấy thông tin tỉnh/thành" });
+    }
+};
+
+exports.getDistrictByCode = async (req, res) => {
+    const { districtCode } = req.params;
+  
+    try {
+      const response = await axios.get(
+        `https://provinces.open-api.vn/api/d/${districtCode}?depth=2`,
+        {
+          httpsAgent: agent,
+        }
+      );
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({ error: "Lỗi khi lấy thông tin quận/huyện" });
+    }
+};
 
 // PRODUCTS
 exports.getAllProducts = async (req, res) => {

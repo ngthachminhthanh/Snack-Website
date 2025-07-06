@@ -63,9 +63,7 @@ const Order = () => {
     // Fetch provinces data
     const fetchProvinces = async () => {
       try {
-        const response = await axios.get(
-          "https://provinces.open-api.vn/api/p/"
-        );
+        const response = await axios.get(`${API_BASE_URL}/api/provinces`);
         setProvinces(response.data);
       } catch (error) {
         console.error("Error fetching provinces:", error);
@@ -88,7 +86,7 @@ const Order = () => {
     if (provinceCode) {
       try {
         const response = await axios.get(
-          `https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`
+          `${API_BASE_URL}/api/provinces/${provinceCode}`
         );
         setSelectedProvinceName(response.data.name);
         setDistricts(response.data.districts);
@@ -112,7 +110,7 @@ const Order = () => {
     if (districtCode) {
       try {
         const response = await axios.get(
-          `https://provinces.open-api.vn/api/d/${districtCode}?depth=2`
+          `${API_BASE_URL}/api/districts/${districtCode}`
         );
         setSelectedDistrictName(response.data.name);
         setWards(response.data.wards);
@@ -198,8 +196,10 @@ const Order = () => {
       <Header input={false} />
 
       {!submitLoading && !isLoading && user ? (
-        <div className="max-w-6xl mx-auto px-4 py-8 mt-10">
-          <h1 className="text-3xl font-bold text-center mb-8">Đặt hàng</h1>
+        <div className="max-w-6xl mx-auto px-4 py-2 mt-20">
+          <h1 className="text-3xl py-1 font-bold text-center sm:mb-8 bg-gradient-to-r from-pink-400 via-orange-500 to-red-500 text-transparent bg-clip-text">
+            Đặt hàng
+          </h1>
 
           <form
             onSubmit={handleSubmit}

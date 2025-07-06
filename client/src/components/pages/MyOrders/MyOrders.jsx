@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "../../auth/AuthContext";
 import { getStatusName } from "../../../utils/utilities";
+import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import Header from "../Header";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -109,61 +110,71 @@ const MyOrders = () => {
                 </div>
               </div>
 
-              {expandedOrders[order.orderId] && (
-                <div className="border-t p-4">
-                  <div className="space-y-4">
-                    <div className="flex justify-between text-sm">
-                      <span className="font-medium">Trạng thái:</span>
-                      <span className="flex items-center gap-2">
-                        {getStatusIcon(order.status)}
-                        {getStatusName(order.status)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="font-medium">Địa chỉ:</span>
-                      <span>{order.address}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="font-medium">
-                        Phương thức thanh toán:
-                      </span>
-                      <span>
-                        {order.payment.method === "Cash on Delivery"
-                          ? "Thanh toán khi nhận hàng"
-                          : order.payment.method}
-                      </span>
-                    </div>
-                    {order.note && (
+              <AnimatePresence initial={false}>
+                {expandedOrders[order.orderId] && (
+                  <motion.div
+                    key={order.orderId}
+                    layout
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="border-t p-4 overflow-hidden"
+                  >
+                    <div className="space-y-4">
                       <div className="flex justify-between text-sm">
-                        <span className="font-medium">Ghi chú:</span>
-                        <span>{order.note}</span>
+                        <span className="font-medium">Trạng thái:</span>
+                        <span className="flex items-center gap-2">
+                          {getStatusIcon(order.status)}
+                          {getStatusName(order.status)}
+                        </span>
                       </div>
-                    )}
+                      <div className="flex justify-between text-sm">
+                        <span className="font-medium">Địa chỉ:</span>
+                        <span>{order.address}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="font-medium">
+                          Phương thức thanh toán:
+                        </span>
+                        <span>
+                          {order.payment.method === "Cash on Delivery"
+                            ? "Thanh toán khi nhận hàng"
+                            : order.payment.method}
+                        </span>
+                      </div>
+                      {order.note && (
+                        <div className="flex justify-between text-sm">
+                          <span className="font-medium">Ghi chú:</span>
+                          <span>{order.note}</span>
+                        </div>
+                      )}
 
-                    <div className="mt-4">
-                      <h4 className="font-medium mb-2">Sản phẩm:</h4>
-                      <div className="space-y-2">
-                        {order.products.map((product, index) => (
-                          <div
-                            key={index}
-                            className="flex justify-between text-sm"
-                          >
-                            <span>
-                              {product.name} x{product.quantity}
-                            </span>
-                            <span>
-                              {(
-                                product.price * product.quantity
-                              ).toLocaleString("vi-VN")}
-                              đ
-                            </span>
-                          </div>
-                        ))}
+                      <div className="mt-4">
+                        <h4 className="font-medium mb-2">Sản phẩm:</h4>
+                        <div className="space-y-2">
+                          {order.products.map((product, index) => (
+                            <div
+                              key={index}
+                              className="flex justify-between text-sm"
+                            >
+                              <span>
+                                {product.name} x{product.quantity}
+                              </span>
+                              <span>
+                                {(
+                                  product.price * product.quantity
+                                ).toLocaleString("vi-VN")}
+                                đ
+                              </span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>

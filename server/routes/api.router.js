@@ -10,6 +10,9 @@ router.get(prefixProducts, apiController.getAllProducts);
 router.get(`${prefixProducts}/:category`, apiController.getProductsByCategory);
 router.post('/order', apiController.createOrder);
 router.get('/myorders/:email', apiController.getMyOrders);
+router.get('/provinces', apiController.getAllProvinces);
+router.get('/provinces/:provinceCode', apiController.getProvinceByCode);
+router.get('/districts/:districtCode', apiController.getDistrictByCode);
 
 // Endpoint API router for Admin
 router.get(`${prefixAdmin}/export/:dataType`, apiController.exportFile);

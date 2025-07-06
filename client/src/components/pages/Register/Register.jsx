@@ -18,8 +18,10 @@ const Register = () => {
 
   const { username, email, phone, password } = formData;
 
-  const onChange = (e) =>
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (error) setError(""); // reset lỗi khi user đang sửa
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();

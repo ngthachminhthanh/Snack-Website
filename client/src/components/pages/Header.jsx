@@ -139,17 +139,25 @@ const Header = ({ input, setProducts }) => {
               height: isMenuOpen ? "auto" : 0,
             }}
             transition={{ duration: 0.3 }}
-            className="sm:hidden absolute top-full left-0 right-0 bg-white shadow-lg rounded-b-lg overflow-hidden z-40"
+            className="sm:hidden absolute top-12 right-4 bg-white shadow-lg rounded-lg overflow-hidden z-40 border border-gray-200"
           >
             <div className="flex flex-col px-4 py-2 gap-2">
               {user ? (
                 <>
                   <motion.span
                     whileHover={{ scale: 1.05 }}
-                    className="flex items-center text-gray-700 font-medium px-2 py-1"
+                    className="flex items-center text-gray-700 font-medium px-2 py-1 cursor-pointer"
                   >
-                    <UserCircle className="mr-1 w-5 h-5" />
-                    {user.username}
+                    <img
+                      referrerPolicy="no-referrer"
+                      src={
+                        user?.photoURL ||
+                        "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
+                      }
+                      alt="avatar"
+                      className="w-6 h-6 rounded-full ml-1 mr-2 object-cover"
+                    />
+                    {user.displayName}
                   </motion.span>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -230,8 +238,15 @@ const Header = ({ input, setProducts }) => {
                   whileHover={{ scale: 1.05 }}
                   className="flex items-center text-gray-700 font-medium px-2 py-1"
                 >
-                  <UserCircle className="mr-1 w-5 h-5" />
-                  {user.username}
+                  <img
+                    src={
+                      user?.photoURL ||
+                      "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740"
+                    }
+                    alt="avatar"
+                    className="w-6 h-6 rounded-full ml-1 mr-2 object-cover"
+                  />
+                  {user.displayName}
                 </motion.span>
                 <motion.button
                   whileHover={{ scale: 1.05 }}

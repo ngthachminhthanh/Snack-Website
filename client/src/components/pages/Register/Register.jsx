@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
+import { motion } from "framer-motion";
 import axios from "axios";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -84,9 +85,23 @@ const Register = () => {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-4">Đăng ký</h2>
+    <div
+      className="flex justify-center items-center min-h-screen bg-cover bg-center bg-gray-100"
+      style={{
+        backgroundImage:
+          "url('https://png.pngtree.com/background/20210709/original/pngtree-chip-bread-food-snack-background-picture-image_536116.jpg')",
+        backgroundColor: "#1a1a1a",
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md"
+      >
+        <h2 className="text-2xl font-bold text-center mb-4 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+          Đăng ký
+        </h2>
         <form onSubmit={onSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="username">
@@ -167,7 +182,7 @@ const Register = () => {
             </Link>
           </p>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

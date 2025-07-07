@@ -7,5 +7,9 @@ module.exports = {
 
     async loginUser(data) {
         return await userService.loginUser(data);
+    },
+
+    async loginWithFirebase(data) {
+        return await userService.loginWithFirebase(data);
     }
 };

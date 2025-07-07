@@ -10,7 +10,7 @@ exports.register = async (req, res) => {
     }
 };
 
-exports.login = async (req, res) => {
+exports.loginWithEmailandPassword = async (req, res) => {
     try {
         const result = await userFacade.loginUser(req.body);
         res.json(result);

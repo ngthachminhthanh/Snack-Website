@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const admin = require('../firebase');
 const CustomerEntity = require('../models/customers.model');
 
 const generateToken = (customer, isAdmin) => {
@@ -55,5 +56,40 @@ module.exports = {
                 isAdmin
             }
         };
+    },
+
+    async loginWithFirebase(idToken) {
+        try {
+            const decodedToken = await admin.auth().verifyIdToken(idToken);
+            const { uid, email, name, phone_number } = decodedToken;
+        
+            let user = await CustomerEntity.findOne({ email });
+        
+            if (!user) {
+              user = new CustomerEntity({
+                username: name || email.split('@')[0],
+                email,
+                phone: phone_number || "",
+              });
+              await user.save();
+            }
+        
+            const adminEmails = ['admin@gmail.com'];
+            const isAdmin = adminEmails.includes(email);
+
+            const token = generateToken(user, isAdmin);
+        
+            return {
+              token,
+              user: {
+                username: user.username,
+                email: user.email,
+                phone: user.phone,
+                isAdmin,
+              },
+            };
+          } catch (err) {
+            throw new Error("Xác thực Firebase thất bại: " + err.message);
+        }
     }
 };

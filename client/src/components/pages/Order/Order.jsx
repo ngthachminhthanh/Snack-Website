@@ -39,7 +39,7 @@ const Order = () => {
       setFormData((prevData) => ({
         ...prevData,
         email: user.email,
-        fullName: user.username,
+        fullName: user.displayName,
         phone: user.phone,
       }));
     }

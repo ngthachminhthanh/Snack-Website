@@ -194,11 +194,8 @@ exports.exportFile = async (req, res) => {
 const projectId = process.env.GOOGLE_PROJECT_ID;
 const languageCode = 'vi'; 
 
-
 // Create a new session client
-const sessionClient = new dialogflow.SessionsClient({
-    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS
-});
+const sessionClient = new dialogflow.SessionsClient();
 
 async function handleIntent(result) {
     const action = result.action;

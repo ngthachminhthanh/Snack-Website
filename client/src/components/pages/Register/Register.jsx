@@ -39,7 +39,10 @@ const Register = () => {
   const handleGoHomeOrGoToCart = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_BASE_URL}/auth/login`, formData);
+      const res = await axios.post(
+        `${API_BASE_URL}/auth/loginWithEmailandPassword`,
+        formData
+      );
       login(res.data.user, res.data.token);
 
       // Lấy trang redirect từ localStorage
@@ -63,17 +66,38 @@ const Register = () => {
 
   if (success) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md text-center">
-          <h2 className="text-2xl font-bold mb-4 text-green-600">
+      <div
+        className="flex justify-center items-center min-h-screen bg-cover bg-center relative"
+        style={{
+          backgroundImage:
+            "url('https://png.pngtree.com/background/20210709/original/pngtree-chip-bread-food-snack-background-picture-image_536116.jpg')",
+          backgroundColor: "#1a1a1a",
+        }}
+      >
+        {/* Overlay tối mờ */}
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+        {/* Card nội dung */}
+        <div className="relative z-10 bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md text-center animate-fade-in">
+          <svg
+            className="mx-auto mb-4 text-green-500"
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M20.292 5.708a1 1 0 0 0-1.414-1.416L9 14.172l-3.878-3.88a1 1 0 1 0-1.414 1.415l4.586 4.586a1 1 0 0 0 1.414 0l10.584-10.585z" />
+          </svg>
+          <h2 className="text-2xl font-bold mb-2 text-green-600">
             Đăng ký thành công!
           </h2>
           <p className="mb-6 text-gray-700">
-            Bạn đã đăng ký thành công tài khoản của mình.
+            Bạn đã tạo tài khoản thành công. Hãy tiếp tục khám phá nhé!
           </p>
           <button
             onClick={handleGoHomeOrGoToCart}
-            className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition-colors"
+            className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition-all shadow-md"
           >
             {localStorage.getItem("redirectAfterLogin") === "/cart"
               ? "Đến giỏ hàng ngay"

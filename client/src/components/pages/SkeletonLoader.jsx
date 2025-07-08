@@ -1,4 +1,3 @@
-// SkeletonLoader.jsx (có thể tách ra file riêng nếu muốn)
 const SkeletonLoader = ({ count = 3 }) => {
   return (
     <div className="space-y-4">

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -63,12 +64,12 @@ const Footer = () => {
           </h4>
           <ul className="space-y-2">
             <li>
-              <a
-                href="#"
+              <Link
+                to="/privacy-policy"
                 className="text-gray-400 hover:text-pink-600 transition duration-300"
               >
                 Chính sách bảo mật
-              </a>
+              </Link>
             </li>
             <li>
               <a

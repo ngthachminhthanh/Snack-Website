@@ -8,6 +8,7 @@ import CartNotification from "./CartNotification";
 import ProductImageModal from "./ProductImageModal";
 import axios from "axios";
 import Header from "../Header";
+import ProductSkeleton from "../ProductSkeleton";
 import "../../../assets/customCSS/LoadingEffect.css";
 import Footer from "../Footer";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -192,9 +193,11 @@ const Home = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex items-center justify-center h-64"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
             >
-              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-pink-600"></div>
+              {Array.from({ length: 8 }).map((_, index) => (
+                <ProductSkeleton key={index} />
+              ))}
             </motion.div>
           ) : products.length > 0 ? (
             <motion.div

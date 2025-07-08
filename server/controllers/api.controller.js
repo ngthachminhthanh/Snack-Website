@@ -197,6 +197,14 @@ const languageCode = 'vi';
 // Create a new session client
 const sessionClient = new dialogflow.SessionsClient();
 
+console.log("Credential path:", process.env.GOOGLE_APPLICATION_CREDENTIALS);
+
+if (fs.existsSync(process.env.GOOGLE_APPLICATION_CREDENTIALS)) {
+    console.log("Credential file exists.");
+} else {
+    console.error("Credential file does NOT exist.");
+}
+
 async function handleIntent(result) {
     const action = result.action;
     const parameters = result.parameters.fields;

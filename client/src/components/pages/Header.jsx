@@ -241,12 +241,12 @@ const Header = ({ input, setProducts }) => {
                   <img
                     src={
                       user?.photoURL ||
-                      "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740"
+                      "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
                     }
                     alt="avatar"
                     className="w-6 h-6 rounded-full ml-1 mr-2 object-cover"
                   />
-                  {user.displayName}
+                  {user.displayName || user.username}
                 </motion.span>
                 <motion.button
                   whileHover={{ scale: 1.05 }}

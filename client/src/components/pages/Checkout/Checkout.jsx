@@ -57,30 +57,36 @@ const Checkout = () => {
             <h2 className="text-xl font-semibold mb-4 text-gray-700">
               Thông Tin Khách Hàng
             </h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex items-center">
-                <Mail className="mr-2 text-blue-500" size={20} />
-                <span>{order.email}</span>
+                <Mail className="mr-2 mt-1 sm:mt-0 text-blue-500" size={20} />
+                <span className="text-sm break-words">{order.email}</span>
               </div>
               <div className="flex items-center">
-                <Phone className="mr-2 text-green-500" size={20} />
-                <span>{order.phone}</span>
+                <Phone className="mr-2 mt-1 sm:mt-0 text-green-500" size={20} />
+                <span className="text-sm break-words">{order.phone}</span>
               </div>
-              <div className="flex items-center col-span-2">
-                <MapPin className="mr-2 text-red-500" size={20} />
-                <span>
+              <div className="flex items-center col-span-1 sm:col-span-2">
+                <MapPin className="mr-2 mt-1 sm:mt-0 text-red-500" size={22} />
+                <span className="text-sm break-words">
                   {order.address}, {order.ward}, {order.district},{" "}
                   {order.province}
                 </span>
               </div>
-              <div className="flex items-center col-span-2">
-                <CalendarDays className="mr-2 text-purple-500" size={20} />
-                <span>Ngày đặt hàng: {formattedDate}</span>
+              <div className="flex items-center col-span-1 sm:col-span-2">
+                <CalendarDays
+                  className="mr-2 mt-1 sm:mt-0 text-purple-500"
+                  size={20}
+                />
+                <span className="text-sm">Ngày đặt hàng: {formattedDate}</span>
               </div>
               {order.note && (
-                <div className="flex items-center col-span-2">
-                  <FileText className="mr-2 text-gray-500" size={20} />
-                  <span>{order.note}</span>
+                <div className="flex items-center col-span-1 sm:col-span-2">
+                  <FileText
+                    className="mr-2 mt-1 sm:mt-0 text-gray-500"
+                    size={20}
+                  />
+                  <span className="text-sm break-words">{order.note}</span>
                 </div>
               )}
             </div>
@@ -90,18 +96,23 @@ const Checkout = () => {
             <h2 className="text-xl font-semibold mb-4 text-gray-700">
               Sản Phẩm Đặt Hàng
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-4">
               {order.items.map((item, index) => (
                 <div
                   key={index}
-                  className="flex justify-between items-center bg-gray-50 p-3 rounded-md"
+                  className="bg-gray-50 p-4 rounded-md shadow-sm flex flex-col sm:flex-row sm:justify-between sm:items-center"
                 >
-                  <div className="flex items-center">
-                    <ShoppingCart className="mr-2 text-purple-500" size={20} />
-                    <span className="font-medium">{item.product_name}</span>
+                  <div className="flex items-start sm:items-center mb-2 sm:mb-0">
+                    <ShoppingCart
+                      className="mr-2 text-purple-500 mt-1 sm:mt-0"
+                      size={20}
+                    />
+                    <span className="font-medium text-sm">
+                      {item.product_name}
+                    </span>
                   </div>
-                  <div className="flex items-center">
-                    <span className="mx-3">Số lượng: {item.quantity}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center text-sm text-gray-700">
+                    <span className="sm:mr-4">Số lượng: {item.quantity}</span>
                     <span>
                       {(item.product_price * item.quantity).toLocaleString()}đ
                     </span>

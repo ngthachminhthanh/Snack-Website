@@ -157,7 +157,7 @@ const Header = ({ input, setProducts }) => {
                       alt="avatar"
                       className="w-6 h-6 rounded-full ml-1 mr-2 object-cover"
                     />
-                    {user.displayName}
+                    {user.displayName || user.username}
                   </motion.span>
                   <motion.button
                     whileHover={{ scale: 1.05 }}

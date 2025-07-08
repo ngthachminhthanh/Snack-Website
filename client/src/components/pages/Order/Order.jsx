@@ -39,7 +39,7 @@ const Order = () => {
       setFormData((prevData) => ({
         ...prevData,
         email: user.email,
-        fullName: user.displayName,
+        fullName: user.displayName || user.username,
         phone: user.phone,
       }));
     }
@@ -218,7 +218,7 @@ const Order = () => {
                   <input
                     type="email"
                     name="email"
-                    value={formData.email}
+                    value={formData.email || ""}
                     placeholder="VD: example999@gmail.com"
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 bg-gray-200 text-gray-500 cursor-not-allowed rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -233,7 +233,7 @@ const Order = () => {
                   <input
                     type="text"
                     name="fullName"
-                    value={formData.fullName}
+                    value={formData.fullName || ""}
                     placeholder="VD: Nguyễn Văn A"
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -248,7 +248,7 @@ const Order = () => {
                   <input
                     type="tel"
                     name="phone"
-                    value={formData.phone}
+                    value={formData.phone || ""}
                     placeholder="VD: 0969999666"
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -263,7 +263,7 @@ const Order = () => {
                   <input
                     type="text"
                     name="address"
-                    value={formData.address}
+                    value={formData.address || ""}
                     placeholder="VD: Số 123 đường abc, ngõ xyz,..."
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -271,7 +271,7 @@ const Order = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Tỉnh thành
@@ -336,7 +336,7 @@ const Order = () => {
                   </label>
                   <textarea
                     name="note"
-                    value={formData.note}
+                    value={formData.note || ""}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                     rows="3"

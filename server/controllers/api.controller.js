@@ -2,62 +2,68 @@ const productFacade = require("../facades/product.facade");
 const orderFacade = require("../facades/order.facade");
 const customerFacade = require("../facades/customer.facade");
 
-const ProductEntity = require("../models/products.model");
-const CustomerEntity = require("../models/customers.model");
 const { findProduct, getPrice, checkStock } = require("../utils/chatbot_handler"); 
-const { Parser } = require('json2csv');
 const dialogflow = require('@google-cloud/dialogflow');
-const mongoose = require('mongoose');
 const uuid = require('uuid');
-const axios = require("axios");
-const https = require("https");
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 
-const agent = new https.Agent({
-  rejectUnauthorized: false,
-});
+// Đọc file provinces-api JSON một lần khi khởi động server
+const provincesData = JSON.parse(
+    fs.readFileSync(path.join(__dirname, '../provinces-api.json'), 'utf-8')
+);
 
 // PROVINCES
-exports.getAllProvinces = async (req, res) => {
+exports.getAllProvinces = (req, res) => {
     try {
-        const response = await axios.get("https://provinces.open-api.vn/api/p/", { httpsAgent: agent });
-        res.json(response.data);
-      } catch (err) {
-        res.status(500).json({ error: "Lỗi proxy hoặc chứng chỉ không hợp lệ" });
-      }
+      const provinces = provincesData.map(({ name, code }) => ({ name, code }));
+      res.json(provinces);
+    } catch (err) {
+      res.status(500).json({ error: "Không thể lấy danh sách tỉnh/thành" });
+    }
 };
 
-exports.getProvinceByCode = async (req, res) => {
+exports.getProvinceByCode = (req, res) => {
     const { provinceCode } = req.params;
   
     try {
-      const response = await axios.get(
-        `https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`,
-        {
-          httpsAgent: agent,
-        }
-      );
-      res.json(response.data);
-    } catch (error) {
+      const province = provincesData.find(p => p.code == provinceCode);
+  
+      if (!province) {
+        return res.status(404).json({ error: "Không tìm thấy tỉnh/thành" });
+      }
+  
+      res.json(province);
+    } catch (err) {
       res.status(500).json({ error: "Lỗi khi lấy thông tin tỉnh/thành" });
     }
 };
+  
 
-exports.getDistrictByCode = async (req, res) => {
+exports.getDistrictByCode = (req, res) => {
     const { districtCode } = req.params;
   
     try {
-      const response = await axios.get(
-        `https://provinces.open-api.vn/api/d/${districtCode}?depth=2`,
-        {
-          httpsAgent: agent,
+      let foundDistrict = null;
+  
+      for (const province of provincesData) {
+        const district = province.districts.find(d => d.code == districtCode);
+        if (district) {
+          foundDistrict = district;
+          break;
         }
-      );
-      res.json(response.data);
-    } catch (error) {
+      }
+  
+      if (!foundDistrict) {
+        return res.status(404).json({ error: "Không tìm thấy quận/huyện" });
+      }
+  
+      res.json(foundDistrict);
+    } catch (err) {
       res.status(500).json({ error: "Lỗi khi lấy thông tin quận/huyện" });
     }
-};
+};  
 
 // PRODUCTS
 exports.getAllProducts = async (req, res) => {

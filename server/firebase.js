@@ -1,7 +1,9 @@
 const admin = require('firebase-admin');
 
+const serviceAccount = JSON.parse(process.env.CREDENTIALS_FIREBASEADMINSDK);
+
 admin.initializeApp({
-  credential: admin.credential.cert(require('./credential_firebaseAdminSDK/snack-website-70d57-firebase-adminsdk-fbsvc-9694f84a20.json')),
+  credential: admin.credential.cert(serviceAccount),
 });
 
 module.exports = admin;

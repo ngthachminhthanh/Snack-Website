@@ -221,6 +221,16 @@ const Login = () => {
               {error}
             </div>
           )}
+
+          <p className="text-right mr-4 text-gray-600 my-4">
+            <Link
+              to="/reset-password"
+              className="text-purple-600 hover:underline"
+            >
+              Quên mật khẩu?
+            </Link>
+          </p>
+
           <motion.button
             type="submit"
             whileHover={{ scale: 1.02 }}

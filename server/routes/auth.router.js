@@ -9,7 +9,6 @@ router.post('/loginWithEmailandPassword', authController.loginWithEmailandPasswo
 router.post('/login/google', async (req, res) => {
     try {
       const { idToken } = req.body;
-      // console.log("Nhận idToken từ client:", idToken);
       const result = await userFacade.loginWithFirebase(idToken);
       res.json(result);
     } catch (err) {
@@ -26,5 +25,8 @@ router.post('/login/facebook', async (req, res) => {
       res.status(400).json({ msg: err.message });
     }
 });
-  
+
+router.post("/send-reset-otp", authController.sendResetOtp);
+router.post("/reset-password", authController.resetPassword);
+
 module.exports = router;

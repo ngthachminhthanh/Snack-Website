@@ -7,6 +7,7 @@ import Order from "./components/pages/Order/Order";
 import MyOrders from "./components/pages/MyOrders/MyOrders";
 import Checkout from "./components/pages/Checkout/Checkout";
 import PrivacyAndPolicy from "./components/pages/PrivacyAndPolicy/PrivacyAndPolicy";
+import ResetPassword from "./components/pages/ResetPassword/ResetPassword";
 import Customers from "./components/admin/Customers/Customers";
 import Dashboard from "./components/admin/Dashboard/Dashboard";
 import Orders from "./components/admin/Orders/Orders";
@@ -24,6 +25,7 @@ function App() {
       <Route path="/myorders" element={<MyOrders />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/privacy-policy" element={<PrivacyAndPolicy />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
 
       <Route
         path="/admin/*"

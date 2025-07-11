@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   CheckCircle,
@@ -18,6 +19,13 @@ const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { order } = location.state || {};
+
+  useEffect(() => {
+    if (!location.state?.order) {
+      // Không có dữ liệu đơn hàng => quay lại trang chủ
+      navigate("/", { replace: true });
+    }
+  }, [location, navigate]);
 
   if (!order) {
     return (
@@ -132,7 +140,7 @@ const Checkout = () => {
         </div>
 
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/", { replace: true })}
           className="flex items-center justify-center w-80 px-6 py-3 my-8 bg-blue-500 text-white rounded-lg transition duration-300 ease-in-out hover:bg-blue-600 hover:scale-105 hover:shadow-lg"
         >
           <Home className="mr-2" size={20} />

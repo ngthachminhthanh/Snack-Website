@@ -51,7 +51,7 @@ const Cart = () => {
       localStorage.setItem("redirectAfterLogin", "/cart");
       navigate("/login");
     } else {
-      navigate("/order");
+      navigate("/order", { replace: true });
     }
   };
 

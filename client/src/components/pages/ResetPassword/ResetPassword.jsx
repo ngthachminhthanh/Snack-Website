@@ -73,7 +73,7 @@ const ResetPassword = () => {
         otp,
         newPassword,
       });
-      setMessage("Đổi mật khẩu thành công! Đang chuyển về đăng nhập...");
+      setMessage("Đổi mật khẩu thành công!");
       setCountdown(5);
     } catch (err) {
       setError(err.response?.data?.message || "Không thể đổi mật khẩu.");
@@ -199,7 +199,7 @@ const ResetPassword = () => {
                 <p className="text-green-700 font-medium">
                   {message}
                   {countdown !== null && (
-                    <span className="block text-sm mt-1 text-gray-600">
+                    <span className="block text-md mt-1 text-gray-600">
                       Chuyển về đăng nhập sau {countdown} giây...
                     </span>
                   )}

@@ -4,7 +4,7 @@ import { Package } from "lucide-react";
 import { useAuth } from "../../auth/AuthContext";
 import "../../../assets/customCSS/LoadingEffect.css";
 import axios from "axios";
-import Header from "../Header";
+import Header from "../../Header";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Order = () => {

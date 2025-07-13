@@ -13,8 +13,8 @@ import { useAuth } from "../../auth/AuthContext";
 import { getStatusName } from "../../../utils/utilities";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
-import Header from "../Header";
-import SkeletonLoader from "../SkeletonLoader";
+import Header from "../../Header";
+import SkeletonLoader from "../../SkeletonLoader";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 

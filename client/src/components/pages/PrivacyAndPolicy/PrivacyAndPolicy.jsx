@@ -1,4 +1,4 @@
-import Header from "../Header";
+import Header from "../../Header";
 
 const PrivacyAndPolicy = () => {
   return (
@@ -78,7 +78,7 @@ const PrivacyAndPolicy = () => {
             href="mailto:support@snackshop.com"
             className="text-purple-600 hover:underline"
           >
-            ngthachminhthanh@gmail.com
+            websiteanvatcungtoi@gmail.com
           </a>
         </p>
       </div>

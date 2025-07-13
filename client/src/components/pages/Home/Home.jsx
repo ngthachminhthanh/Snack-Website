@@ -7,10 +7,10 @@ import ChatBot from "../../chatbot/ChatBot";
 import CartNotification from "./CartNotification";
 import ProductImageModal from "./ProductImageModal";
 import axios from "axios";
-import Header from "../Header";
-import ProductSkeleton from "../ProductSkeleton";
+import Header from "../../Header";
+import ProductSkeleton from "../../ProductSkeleton";
 import "../../../assets/customCSS/LoadingEffect.css";
-import Footer from "../Footer";
+import Footer from "../../Footer";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Home = () => {
@@ -20,7 +20,6 @@ const Home = () => {
   const selectRef = useRef(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [keyword, setKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState("");
   const [category, setCategory] = useState("");
   const [cartNotification, setCartNotification] = useState({
@@ -29,6 +28,8 @@ const Home = () => {
   });
   const [selectedProductImage, setSelectedProductImage] = useState(null);
   const [selectedProductName, setSelectedProductName] = useState(null);
+  const [selectedProductDescription, setSelectedProductDescription] =
+    useState(null);
 
   const fetchProducts = useCallback(async () => {
     setLoading(true);
@@ -68,14 +69,16 @@ const Home = () => {
     setCategory(newCategory);
   };
 
-  const openImageModal = (imageUrl, productName) => {
+  const openImageModal = (imageUrl, productName, productDescription) => {
     setSelectedProductImage(imageUrl);
     setSelectedProductName(productName);
+    setSelectedProductDescription(productDescription);
   };
 
   const closeImageModal = () => {
     setSelectedProductImage(null);
     setSelectedProductName(null);
+    setSelectedProductDescription(null);
   };
 
   const addToCart = (product) => {
@@ -124,6 +127,7 @@ const Home = () => {
         onClose={closeImageModal}
         imageUrl={selectedProductImage}
         productName={selectedProductName}
+        productDescription={selectedProductDescription}
       />
 
       <CartNotification
@@ -136,7 +140,7 @@ const Home = () => {
 
       <ChatBot />
 
-      <div className="flex flex-col md:flex-row flex-grow pt-20">
+      <div className="flex flex-col md:flex-row flex-grow mt-20 md:mt-24 lg:mt-16">
         <motion.aside
           initial={{ x: -300 }}
           animate={{ x: 0 }}
@@ -216,7 +220,13 @@ const Home = () => {
                 >
                   <div
                     className="h-48 overflow-hidden cursor-pointer"
-                    onClick={() => openImageModal(product.image, product.name)}
+                    onClick={() =>
+                      openImageModal(
+                        product.image,
+                        product.name,
+                        product.description
+                      )
+                    }
                   >
                     <motion.img
                       whileHover={{ scale: 1.1 }}

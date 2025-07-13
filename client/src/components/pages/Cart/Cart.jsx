@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, Trash2 } from "lucide-react";
-import Header from "../Header";
+import Header from "../../Header";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);

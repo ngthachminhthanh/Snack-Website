@@ -10,7 +10,7 @@ import {
   Home,
   CalendarDays,
 } from "lucide-react";
-import Header from "../Header";
+import Header from "../../Header";
 
 const Checkout = () => {
   // Đặt hàng thành công => xóa những sản phẩm đã đặt trong giỏ hàng
